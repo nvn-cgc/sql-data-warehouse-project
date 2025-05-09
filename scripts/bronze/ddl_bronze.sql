@@ -3,45 +3,37 @@
 DDL Script: Create Bronze Tables
 ==========================================================
 Scripts Purposes:
-  This script creates ta able in the 'bronze' schema, dropping existing tables
+  This script creates a table in the 'bronze' schema, dropping existing tables
   If they already exist
   Run this script to redefine the DDL structure of 'Bronze' Tables
 ==========================================================
 */
 
 
---delete table if any data present in  BRONZE.crm_cust_info
-if object_id('bronze.crm_cust_info','u') is not null
-	drop table bronze.crm_cust_info;
-
---creating table BRONZE.crm_cust_info
-CREATE TABLE BRONZE.crm_cust_info(
+CREATE OR REPLACE TABLE BRONZE.crm_cust_info(
 	cst_id int
-   ,cst_key nvarchar(50)
-   ,cst_firstname nvarchar(50)
-   ,cst_lastname nvarchar(50)
-   ,cst_material_status nvarchar(50)
-   ,cst_gndr nvarchar(50)
+   ,cst_key varchar(50)
+   ,cst_firstname varchar(50)
+   ,cst_lastname varchar(50)
+   ,cst_material_status varchar(50)
+   ,cst_gndr varchar(50)
    ,cst_create_date date
 );
 
-if object_id('bronze.crm_prd_info','u') is not null
-	drop table bronze.crm_prd_info;
-create table bronze.crm_prd_info(
+
+create OR REPLACE table bronze.crm_prd_info(
 	prd_id int
-   ,prd_key nvarchar(50)
-   ,prd_nm  nvarchar(50)
+   ,prd_key varchar(50)
+   ,prd_nm  varchar(50)
    ,prd_cost int
-   ,prd_line nvarchar(50)
+   ,prd_line varchar(50)
    ,prd_start_dt datetime
    ,prd_end_dt datetime
 );
 
-if object_id('bronze.crm_sales_details','u') is not null
-	drop table bronze.crm_sales_details;
-create table bronze.crm_sales_details(
-	sls_ord_num nvarchar(50)
-   ,sls_prd_key nvarchar(50)
+create OR REPLACE table bronze.crm_sales_details(
+	sls_ord_num varchar(50)
+   ,sls_prd_key varchar(50)
    ,sls_cust_id int
    ,sls_order_dt int
    ,sls_ship_dt int
@@ -52,31 +44,23 @@ create table bronze.crm_sales_details(
 );
 
 
-if object_id('bronze.erp_CUST_AZ12','u') is not null
-	drop table bronze.erp_CUST_AZ12;
-
-create table bronze.erp_CUST_AZ12(
-	CID nvarchar(50)
-   ,BDATE date
-   ,GEN nvarchar(20)
+create OR REPLACE table bronze.erp_CUST_AZ12(
+    CID varchar(50)
+   ,DATE date
+   ,GEN varchar(20)
 );
 
 
-if object_id('bronze.erp_LOC_A101','u') is not null
-	drop table bronze.erp_LOC_A101;
-
-create table bronze.erp_LOC_A101(
-	CID nvarchar(50)
-   ,CNTRY nvarchar(50)
+create OR REPLACE table bronze.erp_LOC_A101(
+	CID varchar(50)
+   ,CNTRY varchar(50)
 );
 
 
-if object_id('bronze.erp_PX_CAT_G1V2','u') is not null
-	drop table bronze.erp_PX_CAT_G1V2;
 
-create table bronze.erp_PX_CAT_G1V2(
-	ID nvarchar(50)
-   ,CAT nvarchar(50)
-   ,SUBCAT nvarchar(50)
-   ,MAINTENANCE nvarchar(50)
+create OR REPLACE table bronze.erp_PX_CAT_G1V2(
+	ID varchar(50)
+   ,CAT varchar(50)
+   ,SUBCAT varchar(50)
+   ,MAINTENANCE varchar(50)
 );
